@@ -1,13 +1,29 @@
 "use client";
 import { useState, useEffect } from "react";
+import type { CSSProperties } from "react";
+
+type ConfettiPiece = {
+  id: number;
+  left: number;
+  delay: number;
+  duration: number;
+  color: string;
+};
+
+type FloatingHeart = {
+  id: number;
+  left: number;
+};
+
 
 export default function Home() {
   const [yesClicked, setYesClicked] = useState(false);
   const [noPos, setNoPos] = useState({ top: "50%", left: "55%" });
   const [noClickCount, setNoClickCount] = useState(0);
   const [yesSize, setYesSize] = useState(1);
-  const [confetti, setConfetti] = useState([]);
-  const [hearts, setHearts] = useState([]);
+  const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
+  const [hearts, setHearts] = useState<FloatingHeart[]>([]);
+
 
   // Messages that change as user clicks "No"
   const noMessages = [
@@ -225,7 +241,7 @@ export default function Home() {
   );
 }
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
   container: {
     height: "100vh",
     background: "linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb)",
